@@ -26,6 +26,8 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.17.7",
+    "@types/jest": "^27.4.1",
+    "faker": "^5.5.3",
     "jest": "^27.5.1",
     "node-mocks-http": "^1.11.0",
     "nodemon": "^2.0.7"
