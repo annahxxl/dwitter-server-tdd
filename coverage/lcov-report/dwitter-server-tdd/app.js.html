@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/39</span>
+                <span class='fraction'>0/44</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/39</span>
+                <span class='fraction'>0/44</span>
             </div>
         
             
@@ -102,7 +102,12 @@
 <a name='L37'></a><a href='#L37'>37</a>
 <a name='L38'></a><a href='#L38'>38</a>
 <a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -141,16 +146,23 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import express from 'express';</span></span></span>
-<span class="cstat-no" title="statement not covered" >import 'express-async-errors';</span>
-<span class="cstat-no" title="statement not covered" >import cors from 'cors';</span>
-<span class="cstat-no" title="statement not covered" >import morgan from 'morgan';</span>
-<span class="cstat-no" title="statement not covered" >import helmet from 'helmet';</span>
-<span class="cstat-no" title="statement not covered" >import tweetsRouter from './router/tweets.js';</span>
-<span class="cstat-no" title="statement not covered" >import authRouter from './router/auth.js';</span>
-<span class="cstat-no" title="statement not covered" >import { config } from './config.js';</span>
-<span class="cstat-no" title="statement not covered" >import { initSocket } from './connection/socket.js';</span>
-<span class="cstat-no" title="statement not covered" >import { sequelize } from './db/database.js';</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import express from "express";</span></span></span>
+<span class="cstat-no" title="statement not covered" >import "express-async-errors";</span>
+<span class="cstat-no" title="statement not covered" >import cors from "cors";</span>
+<span class="cstat-no" title="statement not covered" >import morgan from "morgan";</span>
+<span class="cstat-no" title="statement not covered" >import helmet from "helmet";</span>
+<span class="cstat-no" title="statement not covered" >import tweetsRouter from "./router/tweets.js";</span>
+<span class="cstat-no" title="statement not covered" >import authRouter from "./router/auth.js";</span>
+<span class="cstat-no" title="statement not covered" >import { config } from "./config.js";</span>
+<span class="cstat-no" title="statement not covered" >import { initSocket, getSocketIO } from "./connection/socket.js";</span>
+<span class="cstat-no" title="statement not covered" >import { sequelize } from "./db/database.js";</span>
+<span class="cstat-no" title="statement not covered" >import { TweetController } from "./controller/tweet.js";</span>
+<span class="cstat-no" title="statement not covered" >import * as tweetRepository from "./data/tweet.js";</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >const app = express();</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -161,10 +173,13 @@
 <span class="cstat-no" title="statement not covered" >app.use(express.json());</span>
 <span class="cstat-no" title="statement not covered" >app.use(helmet());</span>
 <span class="cstat-no" title="statement not covered" >app.use(cors(corsOption));</span>
-<span class="cstat-no" title="statement not covered" >app.use(morgan('tiny'));</span>
+<span class="cstat-no" title="statement not covered" >app.use(morgan("tiny"));</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >app.use('/tweets', tweetsRouter);</span>
-<span class="cstat-no" title="statement not covered" >app.use('/auth', authRouter);</span>
+<span class="cstat-no" title="statement not covered" >app.use(</span>
+<span class="cstat-no" title="statement not covered" >  "/tweets",</span>
+<span class="cstat-no" title="statement not covered" >  tweetsRouter(new TweetController(tweetRepository, getSocketIO))</span>
+<span class="cstat-no" title="statement not covered" >);</span>
+<span class="cstat-no" title="statement not covered" >app.use("/auth", authRouter);</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >app.use((req, res, next) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  res.sendStatus(404);</span>
@@ -176,7 +191,7 @@
 <span class="cstat-no" title="statement not covered" >});</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >sequelize.sync().then(() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  console.log('Server is started....');</span>
+<span class="cstat-no" title="statement not covered" >  console.log("Server is started....");</span>
 <span class="cstat-no" title="statement not covered" >  const server = app.listen(config.port);</span>
 <span class="cstat-no" title="statement not covered" >  initSocket(server);</span>
 <span class="cstat-no" title="statement not covered" >});</span>
@@ -187,7 +202,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Mon Mar 21 2022 13:48:51 GMT+0900 (대한민국 표준시)
+                at Mon Mar 21 2022 16:51:26 GMT+0900 (대한민국 표준시)
             </div>
         <script src="../prettify.js"></script>
         <script>

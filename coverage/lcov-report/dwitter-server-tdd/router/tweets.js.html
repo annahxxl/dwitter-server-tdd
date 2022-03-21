@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/34</span>
+                <span class='fraction'>0/33</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/34</span>
+                <span class='fraction'>0/33</span>
             </div>
         
             
@@ -96,8 +96,7 @@
 <a name='L31'></a><a href='#L31'>31</a>
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -130,41 +129,39 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import express from 'express';</span></span></span>
-<span class="cstat-no" title="statement not covered" >import 'express-async-errors';</span>
-<span class="cstat-no" title="statement not covered" >import { body } from 'express-validator';</span>
-<span class="cstat-no" title="statement not covered" >import * as tweetController from '../controller/tweet.js';</span>
-<span class="cstat-no" title="statement not covered" >import { isAuth } from '../middleware/auth.js';</span>
-<span class="cstat-no" title="statement not covered" >import { validate } from '../middleware/validator.js';</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import express from "express";</span></span></span>
+<span class="cstat-no" title="statement not covered" >import "express-async-errors";</span>
+<span class="cstat-no" title="statement not covered" >import { body } from "express-validator";</span>
+<span class="cstat-no" title="statement not covered" >import { isAuth } from "../middleware/auth.js";</span>
+<span class="cstat-no" title="statement not covered" >import { validate } from "../middleware/validator.js";</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >const router = express.Router();</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >const validateTweet = [</span>
-<span class="cstat-no" title="statement not covered" >  body('text')</span>
+<span class="cstat-no" title="statement not covered" >  body("text")</span>
 <span class="cstat-no" title="statement not covered" >    .trim()</span>
 <span class="cstat-no" title="statement not covered" >    .isLength({ min: 3 })</span>
-<span class="cstat-no" title="statement not covered" >    .withMessage('text should be at least 3 characters'),</span>
+<span class="cstat-no" title="statement not covered" >    .withMessage("text should be at least 3 characters"),</span>
 <span class="cstat-no" title="statement not covered" >  validate,</span>
 <span class="cstat-no" title="statement not covered" >];</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >// GET /tweet</span>
-<span class="cstat-no" title="statement not covered" >// GET /tweets?username=:username</span>
-<span class="cstat-no" title="statement not covered" >router.get('/', isAuth, tweetController.getTweets);</span>
+<span class="cstat-no" title="statement not covered" >export default function tweetsRouter(tweetController) {</span>
+<span class="cstat-no" title="statement not covered" >  // GET /tweet</span>
+<span class="cstat-no" title="statement not covered" >  // GET /tweets?username=:username</span>
+<span class="cstat-no" title="statement not covered" >  router.get("/", isAuth, tweetController.getTweets);</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >// GET /tweets/:id</span>
-<span class="cstat-no" title="statement not covered" >router.get('/:id', isAuth, tweetController.getTweet);</span>
+<span class="cstat-no" title="statement not covered" >  // GET /tweets/:id</span>
+<span class="cstat-no" title="statement not covered" >  router.get("/:id", isAuth, tweetController.getTweet);</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >// POST /tweeets</span>
-<span class="cstat-no" title="statement not covered" >router.post('/', isAuth, validateTweet, tweetController.createTweet);</span>
+<span class="cstat-no" title="statement not covered" >  // POST /tweeets</span>
+<span class="cstat-no" title="statement not covered" >  router.post("/", isAuth, validateTweet, tweetController.createTweet);</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >// PUT /tweets/:id</span>
-<span class="cstat-no" title="statement not covered" >router.put('/:id', isAuth, validateTweet, tweetController.updateTweet);</span>
+<span class="cstat-no" title="statement not covered" >  // PUT /tweets/:id</span>
+<span class="cstat-no" title="statement not covered" >  router.put("/:id", isAuth, validateTweet, tweetController.updateTweet);</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >// DELETE /tweets/:id</span>
-<span class="cstat-no" title="statement not covered" >router.delete('/:id', isAuth, tweetController.deleteTweet);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >export default router;</span>
+<span class="cstat-no" title="statement not covered" >  // DELETE /tweets/:id</span>
+<span class="cstat-no" title="statement not covered" >  router.delete("/:id", isAuth, tweetController.deleteTweet);</span>
+<span class="cstat-no" title="statement not covered" >}</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -172,7 +169,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Mon Mar 21 2022 13:48:51 GMT+0900 (대한민국 표준시)
+                at Mon Mar 21 2022 16:51:26 GMT+0900 (대한민국 표준시)
             </div>
         <script src="../../prettify.js"></script>
         <script>
